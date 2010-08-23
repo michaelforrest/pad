@@ -19,6 +19,7 @@ import("comet");
 import("email.sendEmail");
 import("fastJSON");
 import("jsutils.eachProperty");
+import("sqlbase.sqlobj");
 import("sqlbase.sqlbase");
 import("stringutils.{toHTML,md5}");
 import("stringutils");
@@ -196,6 +197,25 @@ function render_delete_post() {
     dbwriter.taskFlushPad(localPadId, "delete"); 
     response.redirect(request.params.returnPath); 
 } 
+
+function render_move_post() {
+	var padToMove = request.params.padIdToMove;
+	var newPadId = request.params.newPadId.replace(/\s/g,'-').toLowerCase().replace(/-$/,'');
+	var moveChildren = request.params.moveChildren;
+	
+	var children = sqlobj.selectMulti("PAD_SQLMETA",{id:['like', padToMove+'%']});
+	/*
+	 * replace content of each document with a redirect tag
+	 * create new documents and prompt 'replace' or 'append' as 
+	 * necessary. 
+	 * This needs to be undoable ideally.
+	 * If the target document is just a redirect, replace the
+	 * redirect automatically.
+	 */
+	
+	
+	response.write("<pre>moving " + padToMove + " to " +  newPadId +  " with children?"  + moveChildren + "\n" + children.map(function(pad){return pad.id}).join("\n") + "</pre>");
+}
 
 
 

@@ -489,6 +489,11 @@ table#otheruserstable { display: none; }
    down on the page in IE.  Strange but it works! */
 #docbar { z-index: 52; }
 
+#movepad-wrapper { width: 340px; right: 200px; }
+#movepad-panel { height: 154px; }
+.docbarmovepad-closing #movepad-wrapper { z-index: 50; }
+#movepad{position:absolute;top: 40px;padding:8px}
+
 #impexp-wrapper { width: 650px; right: 10px; }
 #impexp-panel { height: 160px; }
 .docbarimpexp-closing #impexp-wrapper { z-index: 50; }
@@ -678,7 +683,7 @@ table#otheruserstable { display: none; }
   width: auto; height: auto; font-size: 85%; color: #444; }
 form#reconnectform { display: none; }
 
-#padoptions { position: absolute; top: 0; left: 0; font-size: 1.2em;
+#padoptions{ position: absolute; top: 0; left: 0; font-size: 1.2em;
   color: #444; height: 100%; width: 100%; line-height: 15px; }
 #options-viewhead { font-weight: bold; position: absolute; top: 10px; left: 15px;
   width: auto; height: auto; }

@@ -75,13 +75,10 @@ limitations under the License. */ %>
 
 <% template.define('docBarItems', function() { var ejs_data=''; %>
   <%: plugins.callHookStr('docbarItemsPad', {}, '', '<td class="docbarbutton">', '</td>'); %>
-  <% if (isProAccountHolder) { %> 
-    <td id="docbarsecurity-outer" class="docbarbutton">
-      <a href="javascript:void(0)" id="docbarsecurity">
-	<img src="/static/img/jun09/pad/icon_security.gif">Security
-      </a>
-    </td>
-  <% } /* isProAccountHolder */ %>
+  <td id="docbaroptions-outer" class="docbarbutton">
+    <a href="javascript:void(0)" id="docbarmovepad">
+      <img src="/static/img/ubuntu/pad/move_pad.gif">Move&nbsp;Pad</a>
+  </td>
   <td id="docbaroptions-outer" class="docbarbutton">
     <a href="javascript:void(0)" id="docbaroptions">
       <img src="/static/img/jun09/pad/icon_pad_options.gif">Pad&nbsp;Options</a>
@@ -102,6 +99,7 @@ limitations under the License. */ %>
 
 
 <% template.define('docBarDropdowns', function() { var ejs_data=''; %>
+
   <div id="impexp-wrapper" class="dbpanel-wrapper">
     <div id="impexp-panel" class="dbpanel-panel">
       <div class="dbpanel-leftedge"><!-- --></div>
@@ -212,47 +210,37 @@ limitations under the License. */ %>
       </div>
     </div>
   </div><!-- /options-wrapper -->
-  <% if (isProAccountHolder) { %>          
-      <div id="security-wrapper" class="dbpanel-wrapper">
-	<div id="security-panel" class="dbpanel-panel">
-	  <div class="dbpanel-leftedge"><!-- --></div>
-	  <div class="dbpanel-rightedge"><!-- --></div>
-	  <div class="dbpanel-botleftcorner"><!-- --></div>
-	  <div class="dbpanel-botrightcorner"><!-- --></div>
-	  <div class="dbpanel-middle">
-	    <div class="dbpanel-inner">
-	      <div class="dbpanel-top"><!-- --></div>
-	    </div>
-	    <div class="dbpanel-bottom"><!-- --></div>
-	  </div>
-	  <div id="padsecurity">
-	    <div id="security-access">
-	      <div id="security-accesshead">Pad Access:</div>
-	      <input type="radio" name="padaccess" id="access-private" value="deny"/>
-	      <label for="access-private" id="access-private-label"><strong>Private</strong> (Team account-holders only)</label>
-	      <input type="radio" name="padaccess" id="access-public" value="allow"/>
-	      <label for="access-public" id="access-public-label"><strong>Public</strong> (Allow Internet guests)</label>
-	    </div>
-	    <div id="security-password">
-	      <div id="security-passhead">Password:</div>
-	      <div id="security-passbody">
-		<div class="nopassword" id="password-nonedit">
-		  <div id="password-display">None</div>
-		  <a href="javascript:void(0)" id="password-setlink">Set...</a>
-		  <a href="javascript:void(0)" id="password-clearlink">Clear</a>
-		  </div>
-		<div id="password-inedit">
-		  <a href="javascript:void(0)" id="password-savelink">Save</a>
-		  <a href="javascript:void(0)" id="password-cancellink">Cancel</a>
-		  <input type="text" id="security-passwordedit" maxlength="31" />
+  <div id="movepad-wrapper" class="dbpanel-wrapper">
+    <div id="movepad-panel" class="dbpanel-panel">
+      <div class="dbpanel-leftedge"><!-- --></div>
+      <div class="dbpanel-rightedge"><!-- --></div>
+      <div class="dbpanel-botleftcorner"><!-- --></div>
+      <div class="dbpanel-botrightcorner"><!-- --></div>
+      <div class="dbpanel-middle">
+		<div class="dbpanel-inner">
+		  <div class="dbpanel-top"><!-- --></div>
 		</div>
-	      </div>
-	    </div>
-	    <a id="security-close" href="javascript:void(0)">Hide</a>
-	  </div>
-	</div>
-      </div><!-- /security-wrapper -->
-  <% } /* isProAccountHolder */ %>
+	<div class="dbpanel-bottom"><!-- --></div>
+      </div>
+      <div id="movepad">
+		<strong>Move Pad:</strong>
+		<form action="/ep/pad/move" method="post" id="move-pad"> 
+		  <label for="newPadId">Destination:</label>
+		  <input type="text" name="newPadId" value="<%=localPadId%>"/>
+		  <br/>
+		<input type="checkbox" id="movepad-movechildren" name="moveChildren" checked='checked'/>
+		<label for="movepad-movechildren" id="movepad-colorslabel">Also move children</label>
+		<br/>
+		  <input type="hidden" name="returnPath" value="/" /> 
+		  <input id="padIdToMove" name="padIdToMove" type="hidden" value="<%=localPadId %>" />
+		  <input type="submit" value="move"  onclick="return confirm('Are you sure you want to move this pad?')"/> 
+		</form> 
+		
+	<a id="movepad-close" href="javascript:void(0)">Hide</a>
+      </div>
+    </div>
+
+  </div>
 <% return ejs_data; }); %>
 
 

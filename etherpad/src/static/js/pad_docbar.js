@@ -95,13 +95,15 @@ var paddocbar = (function() {
         savedrevs: { animator: getPanelOpenCloseAnimator("savedrevs", 79) },
         options: { animator: getPanelOpenCloseAnimator(
           "options", 134) },
-        security: { animator: getPanelOpenCloseAnimator("security", 130) }
+        security: { animator: getPanelOpenCloseAnimator("security", 130) },
+	  	movepad: {animator: getPanelOpenCloseAnimator("movepad", 120) },
       };
 
       isTitleEditable = opts.isTitleEditable;
       self.title = opts.initialTitle;
       self.password = opts.initialPassword;
 
+	  $("#docbarmovepad").click(function(){ self.togglePanel("movepad"); });
       $("#docbarimpexp").click(function() {self.togglePanel("impexp");});
       $("#docbarsavedrevs").click(function() {self.togglePanel("savedrevs");});
       $("#docbaroptions").click(function() {self.togglePanel("options");});
