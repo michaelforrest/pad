@@ -189,6 +189,7 @@ function enablePlugin(pluginName) {
   loadPluginHooks(pluginName);
   saveInstalledHooks(pluginName);
   try {
+  	log.info("try to install plugin " + pluginName);
     pluginModules[pluginName].install();
   } catch (e) {
     unloadPluginHooks(pluginName);

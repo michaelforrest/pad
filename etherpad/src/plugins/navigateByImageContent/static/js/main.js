@@ -10,7 +10,7 @@ function init() {
 
 function renderNavigation(){
 	// http://localhost:9000/pads/maverick/+edit
-	
+	if(!request.path.match("/pads/")) return;
 	var pad_path = request.path.split("/pads/")[1].split("/+edit")[0];
 	var parent_path = pad_path.split("/");
 	parent_path.pop();
