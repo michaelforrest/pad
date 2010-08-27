@@ -150,7 +150,7 @@ function OUTER(gscope) {
 	  }
 
 	  dynamicCSS.selectorStyle(getAuthorColorClassSelector(
-	    getAuthorClassName(author))).backgroundColor = bgcolor;
+	    getAuthorClassName(author))).color = bgcolor;
 	}
       }
     }

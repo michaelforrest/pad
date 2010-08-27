@@ -17,6 +17,6 @@ function renderNavigation(){
 	var pad_id = parent_path.join("-");
 	
 	var pads = getPadsBelow(pad_id);
-	return renderTemplateAsString('imageNavigation.ejs',{pads:pads, grouped_pad_list:getGroupChildren(pads,{edit:true})}, 'navigateByImageContent');
+	return renderTemplateAsString('imageNavigation.ejs',{pad_id:pad_id,pads:pads, grouped_pad_list:getGroupChildren(pads,{edit:true})}, 'navigateByImageContent');
 }
 navigateByImageContent = new init();

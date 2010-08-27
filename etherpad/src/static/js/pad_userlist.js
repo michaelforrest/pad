@@ -39,7 +39,7 @@ var paduserlist = (function() {
       else if (power == 3) a = a*a*a;
       else if (power == 4) a = a*a*a*a;
       else if (power >= 5) a = a*a*a*a*a;
-      return Math.round(26*(1-a));
+      return Math.round(20*(1-a));
     }
     var OPACITY_STEPS = 6;
 
@@ -54,7 +54,7 @@ var paduserlist = (function() {
     // IE's poor handling when manipulating the DOM directly.
 
     function getEmptyRowHtml(height) {
-      return '<td colspan="'+NUMCOLS+'" style="border:0;height:'+height+'px"><!-- --></td>';
+      return '<td colspan="'+NUMCOLS+'" ><!-- --></td>';
     }
     function isNameEditable(data) {
       return (! data.name) && (data.status != 'Disconnected');
@@ -90,10 +90,10 @@ var paduserlist = (function() {
           '/>';
       }
 
-      return ['<td style="height:',height,'px" class="usertdswatch"><div class="swatch" style="background:'+data.color+'">&nbsp;</div></td>',
-              '<td style="height:',height,'px" class="usertdname">',nameHtml,'</td>',
-              '<td style="height:',height,'px" class="usertdstatus">',padutils.escapeHtml(data.status),'</td>',
-              '<td style="height:',height,'px" class="activity">',padutils.escapeHtml(data.activity),'</td>'].join('');
+      return [
+              '<td style="color:'+data.color+'" class="usertdname">',nameHtml,'</td>',
+              '<td class="usertdstatus">',padutils.escapeHtml(data.status),'</td>',
+              '<td class="activity">',padutils.escapeHtml(data.activity),'</td>'].join('');
     }
     function getRowHtml(id, innerHtml) {
       return '<tr id="'+id+'">'+innerHtml+'</tr>';
@@ -358,7 +358,7 @@ var paduserlist = (function() {
         $("#mycolorpicker .n"+(i+1)+" .pickerswatch").css(
           'background', palette[i]);
       }
-      $("#mycolorpicker").css('display', 'block');
+      $("#mycolorpicker").css('display', 'block').position($('#myswatch').position());
       colorPickerOpen = true;
       renderMyUserInfo();
     }

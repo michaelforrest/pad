@@ -21,10 +21,12 @@ var padconnectionstatus = (function() {
   var showHideAnimator = padutils.makeShowHideAnimator(function(state) {
     $("#connectionbox").css('opacity', 1 - Math.abs(state));
     if (state == -1) {
-      $("#connectionbox").css('display', 'block');
+      $("#connectionbox").css({
+	  	display: 'block'
+	  });
     }
     else if (state == 1) {
-      $("#connectionbox").css('display', 'none');
+     $("#connectionbox").css({display:'none'});
     }
   }, true, 25, 200);
 

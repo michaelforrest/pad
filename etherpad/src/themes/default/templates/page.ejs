@@ -54,10 +54,6 @@ limitations under the License. */ %>
 	  <div id="accountnav"><%= toHTML(account.email) %>
 	    <a href="/ep/account/sign-out">(sign out)</a>
 	  </div>
-	<% } else if (isPro) { %>
-	  <div id="accountnav">
-	    <a href="<%= signinUrl %>">sign in</a>
-	  </div>
 	<% } %>
 	<div id="specialkeyarea"><!-- --></div>
       </div>

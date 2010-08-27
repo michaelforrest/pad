@@ -1,10 +1,9 @@
 body {
-    font-family: UbuntuBeta
+    font-family: UbuntuBeta;
 }
 
 body {
     margin: 0 auto;
-    width: 976px;
     font-family: 'UbuntuBeta';
     background: #ecebe9;
     font-size: 12px;
@@ -72,7 +71,6 @@ a:visited {
 }
 
 textarea, select, input {
-    margin: 4px 0 8px;
     -moz-border-radius: 2px;
     border-radius: 2px;
     border: 1px solid #888;
@@ -86,7 +84,7 @@ textarea, select, input {
 
 #wrapper {
     background: white;
-    position: relative;
+    position: relative;	
     z-index: 2;
     -moz-border-radius-bottomleft: 5px;
     -moz-border-radius-bottomright: 5px;
@@ -97,31 +95,31 @@ textarea, select, input {
     -webkit-box-shadow: 0px 2px 5px #888;
 }
 
-#navbar {
-    height: 32px;
-    padding-top: 60px;
-	
-    width: 960px;
-    background: url('/static/img/ubuntu/header_background.png') repeat-x;
-    margin: 0;
-    padding-left: 16px;
-    -moz-box-shadow: 0px 1px 2px #888;
-    z-index: 2;
-    position: relative;
-    -moz-border-radius: 0 0 4px 4px;
-    border-radius: 0 0 4px 4px;
+#header{
+	width:100%;
+	background:#e16032 url(/static/img/ubuntu/light_stripes.png) repeat-x;
+	text-align:right;
+	padding:8px 0;
 }
+#header a img{ margin-right:8px;}
 
-#navbar #ubuntu {
-    position: absolute;
-    width: 117px;
-    height: 32px;
-    top: 10px;
-    right: 18px;
-    background: url('/static/img/ubuntu/header_logo.png') no-repeat;
-    text-indent: -9999px;
+#docbar{
+	height:28px;
+	padding:0; margin:0;
+	background:url(/static/img/ubuntu/navbar_background.png) repeat-x;
 }
-
+#padmain{
+	padding:16px;
+}
+ul#editbar{
+	float:left;
+	width:30px;
+}
+#editbar li{ list-style:none}
+#editorcontainerbox{
+	width:660px;
+	margin-left:0;
+}
 #main {
     padding: 8px 16px 0;
 }
@@ -283,6 +281,5 @@ a.edit { color:#999;float:right;}
 #padoptions {font-size:12px}
 
 #navigation {height:30px;position:absolute;z-index:1000;top:0px}
-#docbar{ margin-top:30px }
 
 #new {float:right; padding-right:16px}

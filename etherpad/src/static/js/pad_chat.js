@@ -115,7 +115,7 @@ var padchat = (function(){
     if (userId) {
       var color = getAuthorCSSColor(userId);
       if (color) {
-        lineNode.css('background', color);
+        lineNode.css('color', color);
       }
     }
 
@@ -175,7 +175,7 @@ var padchat = (function(){
     authorColorArray[n] = cdata;
     var cssColor = getAuthorCSSColor(author);
     if (cssColor) {
-      $("#chatlines .chatauthor"+n).css('background',cssColor);
+      $("#chatlines .chatauthor"+n).css('color',cssColor);
     }
   }
 

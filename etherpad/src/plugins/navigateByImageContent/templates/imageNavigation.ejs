@@ -1,5 +1,9 @@
-	<div id="current_section_menu" class="menu header">
-		<ul>
-	 	<%= grouped_pad_list %>
-		</ul>
-	</div>
+<ul id='navigation'>
+	<li class='home'><a href="/" class="home_button"><img src="/static/img/ubuntu/home.png" alt="home"/></a></li>
+	<% for(i=0; i < pads.children.length; i++){ 
+		var pad = pads.children[i];
+		%>
+		<li class='button <%= i==pads.children.length-1 ? 'last' : '' %>'><a href="<%=pad.path%>/+edit"><%=pad.id%></a></li>
+	<%}%>
+	<% grouped_pad_list %>
+</ul>

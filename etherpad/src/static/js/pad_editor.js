@@ -64,7 +64,7 @@ var padeditor = (function(){
       }
       var v;
 
-      v = getOption('showLineNumbers', true);
+      v = getOption('showLineNumbers', false);
       self.ace.setProperty("showslinenumbers", v);
       padutils.setCheckbox($("#options-linenoscheck"), v);
 

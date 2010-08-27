@@ -16,7 +16,7 @@ limitations under the License. */ %>
 <%
   helpers.setBodyId("padbody");
   helpers.addBodyClass(bodyClass);
-  helpers.includeCss("pad2_ejs.css");
+  helpers.includeCss("pad_ubuntu_ejs.css");
   helpers.includeJs("undo-xpopup.js");
   helpers.includeCometJs();
   helpers.includeJQuery();;
@@ -34,87 +34,53 @@ limitations under the License. */ %>
   helpers.setRobotsPolicy({index: false, follow: false});
   
 helpers.includeJs("jquery-1.3.2.js");
-helpers.includeJs("plugins/padHierarchy/jquerycssmenu.js");
+helpers.includeJs("plugins/padHierarchy/menus.js");
 helpers.includeCss("plugins/padHierarchy/ubuntu.css");
 %>
 
 <% template.define('body', function() { var ejs_data=''; %>
-
-  <div id="padpage">
-    <div id="padtop">
-
-      <div id="alertbar">
-	<div id="servermsg">
-	  <h3>Server Notice<span id="servermsgdate"><!-- --></span>:</h3>
-	  <a id="hidetopmsg" href="javascript: void pad.hideServerMessage()">hide</a>
-	  <p id="servermsgtext"><!-- --></p>
-	</div>
-      </div>
-	<div id="navigation">
-		 <%: plugins.callHookStr('renderNavigation', {}, '', '', ''); %>
-	</div>
-      <div id="docbar">
-	<table border="0" cellpadding="0" cellspacing="0" width="100%" id="docbartable">
-	  <tr>
-	  
-	    <td><img src="/static/img/jun09/pad/roundcorner_left.gif"></td>
-            <%: template.use('docBarTitle'); %>
-	    <td width="100%">&nbsp;</td>
-            <%: template.use('docBarItems'); %>
-	    <%: plugins.callHookStr('docbarItemsAll', {}, '', '', ''); %>
-	    <td><img src="/static/img/jun09/pad/roundcorner_right_orange.gif"></td>
-	  </tr>
-	</table>
-        <%: template.use('docBarTitleEditor'); %>
-        <%: template.use('docBarDropdowns'); %>
-      </div><!-- /docbar -->
-    </div>
-	
-    <div id="padmain">
-      <div id="padsidebar"><%: template.use('sideBar'); %></div> 
-
-      <div id="padeditor">
-	<div id="editbar" class="disabledtoolbar">
-	  <% /* floated left */ %>
-	  <div id="editbarleft"><!-- --></div>
-	  <% /* floated right */ %>
-	  <div id="editbarright"><!-- --></div>      
-	  <% /* non-floated */ %>
-	  <div id="editbarinner">
-	    <table cellpadding="0" cellspacing="0" border = "0" id="editbartable">
-              <tr>
-                <%: template.use('editBarItemsLeft'); %>
-	        <td width="100%">&nbsp;</td>
-  	      </tr>
-            </table>
-	    <table cellpadding="0" cellspacing="0" border = "0" id="editbarsavetable">
-	      <tr>
-	        <%: template.use('editBarItemsRight'); %>
-	      </tr>
-	    </table>
+	<div id="header"><a href="/"><img src="/static/img/ubuntu/header_logo.png" alt="ubuntu"/></a></div>
+	<div id="padpage">
+	<div id="padtop">
+	  <div id="alertbar">
+		<div id="servermsg">
+		  <h3>Server Notice<span id="servermsgdate"><!-- --></span>:</h3>
+		  <a id="hidetopmsg" href="javascript: void pad.hideServerMessage()">hide</a>
+		  <p id="servermsgtext"><!-- --></p>
+		</div>
 	  </div>
+	<div id="docbar">
+		<table  id="docbartable">
+		  <tr>
+		  	<td><%: plugins.callHookStr('renderNavigation', {}, '', '', ''); %></td>
+	        
+		    <td width="100%">&nbsp;</td>
+	        <%: template.use('docBarItems'); %>
+		    <%: plugins.callHookStr('docbarItemsAll', {}, '', '', ''); %>
+		  </tr>
+		</table>
+	    <%: template.use('docBarTitleEditor'); %>
+	    <%: template.use('docBarDropdowns'); %>
+	  </div><!-- /docbar -->
 	</div>
-	<div id="editorcontainerbox"><%: template.use('contentArea'); %></div>
-      </div><!-- /padeditor -->
-
-      <div id="bottomarea">
-	<div id="viewbarcontents">
-	  <div id="viewzoomtitle">Zoom:</div>
-	  <select id="viewzoommenu"><option value="z85">85%</option><option value="z100">100%</option><option value="z115">115%</option><option value="z150">150%</option><option value="z200">200%</option><option value="z300">300%</option></select>
-	</div>
-
-	<div id="widthprefcheck"
-	     class="<%= (prefs.isFullWidth?'widthprefchecked':'widthprefunchecked') %>"
-	     ><!-- --></div>
-	<div id="sidebarcheck"
-	     class="<%= (prefs.hideSidebar?'sidebarunchecked':'sidebarchecked') %>"
-	     ><!-- --></div>
-      </div>
-
-    </div><!-- /padmain -->
-
-  </div><!-- /padpage -->
-
-  <%: template.use('modals'); %>
+	
+	<div id="padmain">
+	
+	  <div id="padeditor">
+		<ul id="editbar" class="disabledtoolbar">
+			
+            <%: template.use('editBarItemsLeft'); %>
+	        <%: template.use('editBarItemsRight'); %>
+		</ul>
+		<div id="editorcontainerbox"><%: template.use('contentArea'); %></div>
+	  </div><!-- /padeditor -->
+	
+	  <div id="padsidebar"><%: template.use('sideBar'); %></div> 
+	
+	</div><!-- /padmain -->
+	
+	</div><!-- /padpage -->
+	
+	<%: template.use('modals'); %>
 
 <% return ejs_data; }); %>
