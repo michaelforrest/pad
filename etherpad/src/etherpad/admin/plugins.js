@@ -72,6 +72,7 @@ PluginRegistry.prototype.loadAvailablePlugin = function (pluginName) {
       res = new res[pluginName + "Init"]();
       return res;
     } catch (e) {
+	  log.info("error loading plugin " + pluginName);
       log.info({errorLoadingPlugin:exceptionutils.getStackTracePlain(e)});
     }
   }

@@ -69,7 +69,7 @@ function findExistsingFile(files) {
 
 function findTemplate(filename, pluginList) {
   var files = [];
-  if (pluginList != undefined)
+  if (pluginList != undefined )
     pluginList.forEach(function (plugin) {
       if (plugin != undefined) {
 	files.push('/plugins/' + plugin + '/templates/' + filename);
