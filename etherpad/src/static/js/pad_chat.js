@@ -148,7 +148,7 @@ var padchat = (function(){
   }
   function fadeColor(colorCSS) {
     var color = colorutils.css2triple(colorCSS);
-    color = colorutils.blend(color, [1,1,1], 0.5);
+    color = colorutils.blend(color, [0.2,0.2,0.2], 0.5);
     return colorutils.triple2css(color);
   }
   function getAuthorCSSColor(author) {

@@ -28,15 +28,14 @@ function onRequest() {
 
 
 function edit_page(){
-	//var padId = request.path.toString().split("/pads/")[1].replace(/\/\+edit$/, '').replace(/\//g,"-");
-	//getSession().instantCreate = encodeURIComponent(padId);
+	// let's do authentication here.
+	//response.write("displayName:" + request.params.displayName);
+	
 	
 	var pathPadId = request.path.toString().split("/pads/")[1].replace(/\/\+edit$/, '');
 	var mapping = sqlobj.selectSingle("PAD_PATH", {PATH:pathPadId});
 	
 	var padId = mapping ? mapping.PAD_ID : pathPadId;
-	
-	log.info("mapping " + request.path + " to " + padId);
 	
 	return pad_control.render_pad(padId);
 }

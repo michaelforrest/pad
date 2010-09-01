@@ -28,7 +28,9 @@ function init() {
 
 function install() {
  log.info("Installing padHierarchy");
-
+// sqlobj.addColumns('billing_purchase', {
+//   title: "TEXT"
+//  });
  sqlobj.createTable('PAD_PATH', {
    ID: 'int not null '+sqlcommon.autoIncrementClause()+' primary key',
    PATH: 'varchar(128) character set utf8 collate utf8_bin not null',
