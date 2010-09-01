@@ -4,6 +4,7 @@ There are a couple of core hacks that will take me a while to do properly. Befor
 
 #Roadmap
 I have a different set of priorities to the etherpad core team. The features I am working on now are:
+
 1. Hierarchical document management
 2. OpenID-based authentication
 3. RSS of document history
