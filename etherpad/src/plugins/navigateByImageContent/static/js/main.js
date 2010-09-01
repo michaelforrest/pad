@@ -3,8 +3,7 @@ import("sqlbase.sqlbase");
 import("etherpad.log");
 import("etherpad.utils.*");
 import("plugins.padHierarchy.helpers.hierarchyHelper.*");
-
-function navigateByImageContentInit() {
+function init() {
   this.hooks = ['renderNavigation',];
   this.aceGetFilterStack = renderNavigation;
 }
@@ -20,4 +19,4 @@ function renderNavigation(){
 	var pads = getPadsBelow(pad_id);
 	return renderTemplateAsString('imageNavigation.ejs',{pad_id:pad_id,pads:pads, grouped_pad_list:getGroupChildren(pads,{edit:true})}, 'navigateByImageContent');
 }
-navigateByImageContent = new navigateByImageContentInit();
+navigateByImageContent = new init();
