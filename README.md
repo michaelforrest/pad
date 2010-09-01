@@ -4,12 +4,12 @@ There are a couple of core hacks that will take me a while to do properly. Befor
 
 #Roadmap
 I have a different set of priorities to the etherpad core team. The features I am working on now are:
- 1. Hierarchical document management
- 2. OpenID-based authentication
- 3. RSS of document history
- 4. Search
- 5. A graphic redesign (see the 'ubuntu' template for progress - you will need to have my plugins switched on for this to display correctly though.)
- 6. Syntax highlighting for a use-case documentation syntax we are developing.
+1. Hierarchical document management
+2. OpenID-based authentication
+3. RSS of document history
+4. Search
+5. A graphic redesign (see the 'ubuntu' template for progress - you will need to have my plugins switched on for this to display correctly though.)
+6. Syntax highlighting for a use-case documentation syntax we are developing.
 
 If you are interested, here is the main mockup I'm working to: http://people.canonical.com/~michaelforrest/specs/ubuntu_spec_editor/spec-editor.png
 
