@@ -28,3 +28,4 @@ build-stamp
 infrastructure/lib/mysql-*.jar
 .externalToolBuilders
 .project
+tags
