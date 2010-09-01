@@ -4,6 +4,8 @@ import("etherpad.log");
 import("etherpad.utils.*");
 import("plugins.padHierarchy.helpers.hierarchyHelper.*");
 
+// this is wrong... I need to move it to the right place.
+
 function navigateByImageContentInit() {
   this.hooks = ['renderNavigation',];
   this.aceGetFilterStack = renderNavigation;
