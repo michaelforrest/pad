@@ -8,24 +8,22 @@ import("etherpad.pad.model");
 import("etherpad.pad.padutils");
 import("etherpad.sessions.getSession");
 import("plugins.padHierarchy.helpers.hierarchyHelper.*");
+
 function onRequest() {
-	
 	var section_path = (request.path.toString() == '/pads') ? 'pads'  :  request.path.toString().split("/pads/")[1].replace(/\/$/ , '');
 	var id_filter = section_path=='pads' ? '' : section_path.replace(/\//g,"-");
 
 	var grouped_pads = getPadsBelow(id_filter);
  
 	
-	renderHtml('hierarchyIndex.ejs',{
-									path:request.path,
-									grouped_pad_list:getGroupChildren(grouped_pads),
-									pads:grouped_pads,
-									selected_pad:grouped_pads}
-									,'padHierarchy');
+	renderHtml('hierarchyIndex.ejs',
+		   {path:request.path,
+		    grouped_pad_list:getGroupChildren(grouped_pads),
+		    pads:grouped_pads,
+		    selected_pad:grouped_pads},
+		   ['padHierarchy']);
 	return true;
 }
-
-
 
 function edit_page(){
 	// let's do authentication here.
@@ -39,18 +37,19 @@ function edit_page(){
 	
 	return pad_control.render_pad(padId);
 }
+
 function redirect_to_pads_path(){
 	if (!isStaticRequest()) {
 		if (request.path == '/pads') {
 			return onRequest();
-		}
-		else {
+		} else {
 			response.redirect("/pads" + request.path);
 		}
-	}else{
+	} else {
 		// do something else... this static routing's a bit strange..
 	}
 }
+
 function render_main(){
 	response.redirect("/pads");
 }

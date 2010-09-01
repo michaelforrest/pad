@@ -29,12 +29,12 @@ import("sqlbase.sqlbase");
 import("sqlbase.sqlcommon");
 import("sqlbase.sqlobj");
 import("plugins.fileUpload.models");
+import("etherpad.pad.padutils");
 jimport("org.apache.commons.fileupload");
 
 function onRequest() {  
   var isPro = pro_utils.isProDomainRequest();
   var userId = padusers.getUserId();
-
 
   helpers.addClientVars({
     userAgent: request.headers["User-Agent"],
@@ -54,14 +54,13 @@ function onRequest() {
     var itemFactory = new fileupload.disk.DiskFileItemFactory();
     var handler = new fileupload.servlet.ServletFileUpload(itemFactory);
     var items = handler.parseRequest(request.underlying).toArray();
-    for (var i = 0; i < items.length; i++){
-      if (!items[i].isFormField())
-        uploads.push('/up/' + models.storeFile(items[i]));
+    for (var i = 0; i < items.length; i++)
+      if (!items[i].isFormField()) {
+        uploads.push(request.scheme + '://' + request.host + '/up/' + models.storeFile(items[i]));
     }
 
-    response.setContentType("text/json; charset=utf-8");
-    response.write(
-      renderTemplateAsString(
+    response.setContentType("text/html");
+    response.write(renderTemplateAsString(
         "fileUploaded.ejs",
         {
           uploads: uploads,
@@ -69,7 +68,7 @@ function onRequest() {
 	  isProAccountHolder: isProUser,
 	  account: getSessionProAccount(), // may be falsy
         },
-       'fileUpload'));
+       ['fileUpload']));
     if (request.acceptsGzip) {
       response.setGzip(true);
     }
@@ -77,11 +76,11 @@ function onRequest() {
     renderHtml(
       "fileUpload.ejs",
       {
-	isPro: isPro,
-	isProAccountHolder: isProUser,
-	account: getSessionProAccount(), // may be falsy
+        isPro: isPro,
+        isProAccountHolder: isProUser,
+        account: getSessionProAccount(), // may be falsy
       },
-      'fileUpload');
+      ['fileUpload']);
   }
   return true;
 }

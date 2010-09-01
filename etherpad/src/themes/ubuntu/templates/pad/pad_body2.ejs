@@ -74,7 +74,7 @@ limitations under the License. */ %>
 
 
 <% template.define('docBarItems', function() { var ejs_data=''; %>
-  <%: plugins.callHookStr('docbarItemsPad', {}, '', '<td class="docbarbutton">', '</td>'); %>
+  <%: template.callHookStr('docbarItemsPad', {}, '', '<td class="docbarbutton">', '</td>'); %>
   <td id="docbaroptions-outer" class="docbarbutton">
     <a href="javascript:void(0)" id="docbarmovepad">
       <img src="/static/img/ubuntu/pad/move_pad.gif">Move&nbsp;Pad</a>
@@ -95,7 +95,7 @@ limitations under the License. */ %>
 
 
 <% template.define('docBarDropdowns', function() { var ejs_data=''; %>
-
+ <%: template.callHookStr('docBarDropdownsPad', {}, '', '', ''); %>
   <div id="impexp-wrapper" class="dbpanel-wrapper">
     <div id="impexp-panel" class="dbpanel-panel">
       <div class="dbpanel-leftedge"><!-- --></div>

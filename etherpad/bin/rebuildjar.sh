@@ -132,8 +132,6 @@ mkdir -p build/etherpad-jars
 
 echo "including etherpad JARs..."
 
-echo "HERERWEW"
-
 JARFILES="echo ../etherpad/lib/*.jar"
 function genjar {
     echo "unzipping JARs..."

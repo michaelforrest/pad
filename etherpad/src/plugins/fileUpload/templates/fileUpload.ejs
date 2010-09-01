@@ -14,19 +14,23 @@ limitations under the License. */ %>
 <%
  helpers.setHtmlTitle("Test plugin");
  helpers.setBodyId("padbody");
- helpers.addBodyClass("limwidth nonpropad nonprouser");
- helpers.includeCss("pad2_ejs.css");
  helpers.setRobotsPolicy({index: false, follow: false})
  helpers.includeJQuery();
  helpers.includeCometJs();
- helpers.includeJs("json2.js");
- helpers.addToHead('\n<style type="text/css" title="dynamicsyntax"></style>\n');
+
+ helpers.includeJs('plugins/fileUpload/ajaxupload.js');
+ helpers.includeJs('plugins/fileUpload/fileUpload.js');
 %>
 
-<div id="padpage">
- <form method="POST" enctype="multipart/form-data">
-  <input type="file" name="fileParam">
-  <button type="submit">Submit</button>
- </form>
+<html>
+ <body>
+  <div id="uploadFileSubmit">Upload</div>
+  <br>
 
-</div>
+  <form method="POST" enctype="multipart/form-data">
+   <input type="file" name="fileParam">
+   <button type="submit">Submit</button>
+  </form>
+
+ </body>
+</html>

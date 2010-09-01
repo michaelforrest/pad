@@ -96,7 +96,7 @@ var paddocbar = (function() {
         options: { animator: getPanelOpenCloseAnimator(
           "options", 134) },
         security: { animator: getPanelOpenCloseAnimator("security", 130) },
-	  	movepad: {animator: getPanelOpenCloseAnimator("movepad", 120) },
+  	  	movepad: {animator: getPanelOpenCloseAnimator("movepad", 120) },
       };
 
       isTitleEditable = opts.isTitleEditable;

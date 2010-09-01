@@ -10,9 +10,10 @@
 import("etherpad.log");
 import("plugins.navigateByImageContent.static.js.main");
 import("plugins.navigateByImageContent.hooks");
-function init() {
+
+function navigateByImageContentInit() {
  this.hooks = ['renderNavigation','padModelWriteToDB'];
- this.client = new main.init(); 
+ this.client = new main.navigateByImageContentInit(); 
  this.description = 'Adds a header section where all documents can be traversed horizontally by the images they contain.';
  this.renderNavigation = main.renderNavigation;
  this.padModelWriteToDB = hooks.padModelWriteToDB;

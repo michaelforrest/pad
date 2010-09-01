@@ -1,4 +1,4 @@
-function init() {
+function showImagesInit() {
   this.hooks = ['aceGetFilterStack', 'aceCreateDomLine'];
   this.aceGetFilterStack = aceGetFilterStack;
   this.aceCreateDomLine = aceCreateDomLine;
@@ -41,4 +41,4 @@ function aceCreateDomLine(args) {
 //     extraCloseTags: '</a></strong>'}];
 //  }
 }
-showImages = new init();
+showImages = new showImagesInit();

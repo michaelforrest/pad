@@ -54,8 +54,6 @@ import("etherpad.control.pad.pad_changeset_control");
 import("etherpad.control.pad.pad_importexport_control");
 import("etherpad.collab.readonly_server");
 
-import("etherpad.pad.dbwriter");
-
 import("dispatch.{Dispatcher,PrefixMatcher,DirMatcher,forward}");
 
 jimport("java.lang.System.out.println");
@@ -218,7 +216,6 @@ function render_move_post() {
 }
 
 
-
 // Tokbox
 function render_newpad_xml_post() {
   var localPadId;
@@ -360,7 +357,7 @@ function render_pad(localPadId) {
         initialPassword = propad.getPassword();
       });
     }
-    documentBarTitle = (proTitle || localPadId || "Public Pad");
+    documentBarTitle = (proTitle || "Public Pad");
 
     var specialKey = request.params.specialKey ||
       (sessions.isAnEtherpadAdmin() ? collab_server.getSpecialKey('invisible') :

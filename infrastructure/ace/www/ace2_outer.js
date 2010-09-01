@@ -119,9 +119,18 @@ function Ace2Editor() {
     // returns array of {error: <browser Error object>, time: +new Date()}
     return info.ace_getUnhandledErrors();
   };
+
+  editor.callWithAce = pendingInit(function(fn, callStack, normalize) {
+    return info.ace_callWithAce(fn, callStack, normalize);
+  });
+
   editor.execCommand = pendingInit(function(cmd, arg1) {
     info.ace_execCommand(cmd, arg1);
   });
+  editor.replaceRange = pendingInit(function(start, end, text) {
+    info.ace_replaceRange(start, end, text);
+  });
+
 
   // calls to these functions ($$INCLUDE_...)  are replaced when this file is processed
   // and compressed, putting the compressed code from the named file directly into the

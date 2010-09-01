@@ -16,9 +16,10 @@ import("sqlbase.sqlcommon");
 import("etherpad.log");
 import("plugins.padHierarchy.static.js.main");
 import("plugins.padHierarchy.hooks");
-function init() {
+
+function padHierarchyInit() {
  this.hooks = ['handlePath'];
- this.client = new main.init(); 
+ this.client = new main.padHierarchyInit(); 
  this.description = 'Allows groups of documents to be found and created based on url structure.';
  //this.renderPageBodyPre = main.renderPageBodyPre;
  this.handlePath = hooks.handlePath;
