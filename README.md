@@ -12,11 +12,11 @@ I have a different set of priorities to the etherpad core team. The features I a
 5. A graphic redesign (see the 'ubuntu' template for progress - you will need to have my plugins switched on for this to display correctly though.)
 6. Syntax highlighting for a use-case documentation syntax we are developing.
 
-If you are interested, here is the main mockup I'm working to: http://people.canonical.com/~michaelforrest/specs/ubuntu_spec_editor/spec-editor.png
+If you are interested, here is the main mockup I'm working to: [Editor design](http://people.canonical.com/~michaelforrest/specs/ubuntu_spec_editor/spec-editor.png)
 
 There will be various ways of navigating content as a non-editor that I have yet to create mockups for. 
 
-It starts with something like this: http://people.canonical.com/~michaelforrest/specs/ubuntu_spec_editor/spec-viewer.png
+It starts with something like this: [View page](http://people.canonical.com/~michaelforrest/specs/ubuntu_spec_editor/spec-viewer.png)
 
 Thank you - I hope I can play well as a downstream and will do my best to encapsulate the functionality with the broadest appeal in plugins. However, sometimes the reengineering will be more significant so to keep it out of the core is initially impractical. 
 
