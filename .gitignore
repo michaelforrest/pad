@@ -29,3 +29,4 @@ infrastructure/lib/mysql-*.jar
 .externalToolBuilders
 .project
 tags
+.DS_Store
