@@ -30,8 +30,9 @@ function edit_page(){
 	//response.write("displayName:" + request.params.displayName);
 
 	var permalink = request.path.toString().split("/pads/")[1].replace(/\/\+edit$/, '');
-	var id = sqlobj.selectSingle("PAD_SQLMETA", {permalink:permalink});
-	return pad_control.render_pad(id);
+	var pad = sqlobj.selectSingle("PAD_SQLMETA", {permalink:permalink});
+	if(!pad) return false;
+	return pad_control.render_pad(pad.id);
 }
 
 function redirect_to_pads_path(){

@@ -122,7 +122,7 @@ function getLocalPadId(pad) {
 }
 
 function isProPadId(globalPadId) {
-  return (globalPadId.indexOf("$") > 0);
+  return (globalPadId && (globalPadId.indexOf("$") > 0));
 }
 
 function isProPad(pad) {

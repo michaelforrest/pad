@@ -30,8 +30,8 @@ function padHierarchyInit() {
 function install() {
  log.info("Installing padHierarchy");
  sqlobj.addColumns('PAD_SQLMETA', {
-   permalink: "varchar(128) character set utf8 collate utf8_bin",
-   parent_id: "varchar(128) character set utf8 collate utf8_bin"
+   //permalink: "varchar(128) character set utf8 collate utf8_bin",
+   //parent_id: "varchar(128) character set utf8 collate utf8_bin"
   });
   sqlobj.addColumns()
   /*
@@ -41,7 +41,7 @@ function install() {
    var allPads = sqlobj.selectMulti("PAD_SQLMETA",{});
    for(var i = 0; i < allPads.length; i++){
    	var pad = allPads[i];
-	if(!path){
+	if(!pad.permalink){
 		log.info("creating path mapping for " + pad.id);
 		sqlobj.update("PAD_SQLMETA",{id:pad.id}, {permalink:pad.id });
 	}
