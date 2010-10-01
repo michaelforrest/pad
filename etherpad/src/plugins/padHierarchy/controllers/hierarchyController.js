@@ -28,14 +28,10 @@ function onRequest() {
 function edit_page(){
 	// let's do authentication here.
 	//response.write("displayName:" + request.params.displayName);
-	
-	
-	var pathPadId = request.path.toString().split("/pads/")[1].replace(/\/\+edit$/, '');
-	var mapping = sqlobj.selectSingle("PAD_PATH", {PATH:pathPadId});
-	
-	var padId = mapping ? mapping.PAD_ID : pathPadId;
-	
-	return pad_control.render_pad(padId);
+
+	var permalink = request.path.toString().split("/pads/")[1].replace(/\/\+edit$/, '');
+	var id = sqlobj.selectSingle("PAD_SQLMETA", {permalink:permalink});
+	return pad_control.render_pad(id);
 }
 
 function redirect_to_pads_path(){
