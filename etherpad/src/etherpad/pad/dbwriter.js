@@ -160,6 +160,7 @@ function taskWritePad(padId) {
 }
 
 function taskCheckForStalePads() {
+	return;
   // do this first
   _scheduleCheckForStalePads();
 
