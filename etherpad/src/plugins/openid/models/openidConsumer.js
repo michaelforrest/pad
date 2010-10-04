@@ -34,6 +34,16 @@ function OpenidConsumer(options){
 		// TODO: verify that this came from where I think it came from	
 		this.nickname = params['openid.sreg.nickname'];
 		
+		encodedForm = '';
+		for(var key in params)
+		{
+			if(key.match(/^openid\./) != null)
+			{
+				encodedForm = encodedForm + key + ':' + params[key] + "\n";
+			}
+		}
+		console.log(encodedForm);
+		
 		return true;
 	}
 	
