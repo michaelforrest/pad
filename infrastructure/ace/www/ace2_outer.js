@@ -204,12 +204,19 @@ function Ace2Editor() {
 	iframeHTML.join('+')+'); doc.close(); '+
 	'}, 0); }';
 
+    var outerHeadContentFromPlugin = '';
+    plugins.callHook(
+        "aceInitOuterdocbodyHead", {outerHeadContentFromPlugin:outerHeadContentFromPlugin});
+
       var outerHTML = [doctype, '<html><head>',
 	$$INCLUDE_CSS("editor.css"),
 	// bizarrely, in FF2, a file with no "external" dependencies won't finish loading properly
 	// (throbs busy while typing)
 	'<link rel="stylesheet" type="text/css" href="data:text/css,"/>',
 	'\x3cscript>', outerScript, '\x3c/script>',
+	
+	outerHeadContentFromPlugin,
+	
 	'</head><body id="outerdocbody"><div id="sidediv"><!-- --></div><div id="linemetricsdiv">x</div><div id="overlaysdiv"><!-- --></div></body></html>'];
 
 
