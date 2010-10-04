@@ -241,6 +241,9 @@ limitations under the License. */ %>
 
 
 <% template.define('sideBar', function() { var ejs_data=''; %>
+   <div class="aux" style="margin-bottom:5px">
+	   <%: plugins.callHookStr('renderAuthentication', {}, '', '', ''); %>
+   </div>
    <div id="connectionbox" class="cboxconnecting">
       <div id="connectionboxinner">
 	<div class="connecting">
