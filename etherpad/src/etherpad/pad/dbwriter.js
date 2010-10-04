@@ -160,6 +160,7 @@ function taskWritePad(padId) {
 }
 
 function taskCheckForStalePads() {
+    return; // DISABLED FOR NON-ETHERIAL PAD!
   // do this first
   _scheduleCheckForStalePads();
 
