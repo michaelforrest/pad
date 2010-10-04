@@ -38,11 +38,9 @@ function OpenidConsumer(options){
 		for(var key in params)
 		{
 			if(key.match(/^openid\./) != null)
-			{
 				encodedForm = encodedForm + key + ':' + params[key] + "\n";
-			}
 		}
-		console.log(encodedForm);
+		console.log(SHA1(encodedForm));
 		
 		return true;
 	}
