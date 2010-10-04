@@ -24,15 +24,20 @@ function onRequest() {
 		   ['padHierarchy']);
 	return true;
 }
-
+function getPermalinkFromRequest(){
+    return request.path.toString().split("/pads/")[1].replace(/\/\+edit$/, '');
+}
 function edit_page(){
 	// let's do authentication here.
 	//response.write("displayName:" + request.params.displayName);
 
-	var permalink = request.path.toString().split("/pads/")[1].replace(/\/\+edit$/, '');
+	var permalink = getPermalinkFromRequest();
 	var pad = sqlobj.selectSingle("PAD_SQLMETA", {permalink:permalink});
-	if(!pad) return false;
-	return pad_control.render_pad(pad.id);
+	var id = pad ? pad.id : permalink.replace(/\//g,"-");
+	if(!pad) {
+	    getSession().instantCreate = id;
+    }
+	return pad_control.render_pad(id);
 }
 
 function redirect_to_pads_path(){
