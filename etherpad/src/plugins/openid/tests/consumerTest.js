@@ -7,8 +7,6 @@ ConsumerTest.prototype.setUp = function(){
 		'openid.signed':'assoc_handle,claimed_id,identity,invalidate_handle,mode,ns,ns.sreg,op_endpoint,response_nonce,return_to,signed,sreg.nickname',
 		'openid.sig':'TYRoYZcYNm9Uh3bA8N3Im5cC2ps=',
 		'openid.response_nonce':'2010-09-03T11:25:39ZDf9KwX',
-		'open_id_complete':'1',
-		'foo':'bar',
 		'openid.claimed_id':'https://login.launchpad.net/+id/ref466F',
 		'openid.assoc_handle':'{HMAC-SHA1}{4c80db33}{muvwTA==}',
 		'openid.sreg.nickname':'michaelforrest',
