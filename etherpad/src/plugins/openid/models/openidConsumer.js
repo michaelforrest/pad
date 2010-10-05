@@ -34,6 +34,12 @@ function OpenidConsumer(options){
 		// TODO: verify that this came from where I think it came from	
 		this.nickname = params['openid.sreg.nickname'];
 		
+		this.keyValueFormEncode(params);
+		
+		return true;
+	}
+	
+	this.keyValueFormEncode = function(params){
 		encodedForm = '';
 		for(var key in params)
 		{
@@ -41,9 +47,7 @@ function OpenidConsumer(options){
 			if(keyMatch != null)
 				encodedForm = encodedForm + keyMatch[1] + ':' + params[key] + "\n";
 		}
-		console.log(SHA1(encodedForm));
-		
-		return true;
+		return encodedForm;
 	}
 	
     OpenidConsumer();
