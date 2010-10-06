@@ -204,7 +204,7 @@ function Ace2Editor() {
 	iframeHTML.join('+')+'); doc.close(); '+
 	'}, 0); }';
 
-    var outerHeadContentFromPlugin = '';
+    var outerHeadContentFromPlugin = [];
     plugins.callHook(
         "aceInitOuterdocbodyHead", {outerHeadContentFromPlugin:outerHeadContentFromPlugin});
 
@@ -215,7 +215,7 @@ function Ace2Editor() {
 	'<link rel="stylesheet" type="text/css" href="data:text/css,"/>',
 	'\x3cscript>', outerScript, '\x3c/script>',
 	
-	outerHeadContentFromPlugin,
+	outerHeadContentFromPlugin.join(''),
 	
 	'</head><body id="outerdocbody"><div id="sidediv"><!-- --></div><div id="linemetricsdiv">x</div><div id="overlaysdiv"><!-- --></div></body></html>'];
 

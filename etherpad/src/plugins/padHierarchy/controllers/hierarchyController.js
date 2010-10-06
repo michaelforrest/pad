@@ -8,6 +8,7 @@ import("etherpad.pad.model");
 import("etherpad.pad.padutils");
 import("etherpad.sessions.getSession");
 import("plugins.padHierarchy.helpers.hierarchyHelper.*");
+import("etherpad.collab.ace.contentcollector.sanitizeUnicode");
 
 function onRequest() {
 	var section_path = (request.path.toString() == '/pads') ? 'pads'  :  request.path.toString().split("/pads/")[1].replace(/\/$/ , '');
@@ -54,4 +55,11 @@ function redirect_to_pads_path(){
 
 function render_main(){
 	response.redirect("/pads");
+}
+
+function update_pad_meta(){
+    var new_title = sanitizeUnicode(request.params.value);
+    
+    response.write(new_title);
+    return true;
 }

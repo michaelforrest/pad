@@ -1,0 +1,7 @@
+h1 {
+    font-family: ‘Ubuntubeta’, ‘Ubuntu’, ‘Bitstream Vera Sans’, ‘DejaVu Sans’, Tahoma, sans-serif; 
+    font-weight:normal; 
+    width:70%;
+    padding-left:10px;
+}
+h1 input { font-size:1em;  }
