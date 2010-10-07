@@ -20,8 +20,8 @@ function padModelWriteToDB(args){
 
 function renderNavigation(args) {
 	// http://localhost:9000/pads/maverick/+edit
-
-        var parts = args.request.path.split("/pads/");
+    if(!args.request) return;
+    var parts = args.request.path.split("/pads/");
 	if (parts.length < 2) return '';
 
 	var pad_path = parts[1].split("/+edit")[0];
