@@ -5,8 +5,7 @@ import("etherpad.utils.*");
 import("plugins.padHierarchy.helpers.hierarchyHelper.*");
 
 function navigateByImageContentInit() {
-  this.hooks = ['renderNavigation',];
-  this.aceGetFilterStack = renderNavigation;
+  this.hooks = [];
 }
 
 function renderNavigation(){

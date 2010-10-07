@@ -38,12 +38,12 @@ var padconnectionstatus = (function() {
     },
     connected: function() {
       status = {what: 'connected'};
-      showHideAnimator.hide();
+      padmodals.hideModal(500);
     },
     reconnecting: function() {
       status = {what: 'reconnecting'};
-      $("#connectionbox").get(0).className = 'cboxreconnecting';
-      showHideAnimator.show();
+      $("#connectionbox").get(0).className = 'modaldialog cboxreconnecting';
+      padmodals.showModal("#connectionbox", 500);
     },
     disconnected: function(msg) {
       status = {what: 'disconnected', why: msg};
@@ -52,9 +52,9 @@ var padconnectionstatus = (function() {
             k == 'initsocketfail' || k == 'unauth')) {
         k = 'unknown';
       }
-      var cls = 'cboxdisconnected cboxdisconnected_'+k;
+      var cls = 'modaldialog cboxdisconnected cboxdisconnected_'+k;
       $("#connectionbox").get(0).className = cls;
-      showHideAnimator.show();
+      padmodals.showModal("#connectionbox", 500);
     },
     isFullyConnected: function() {
       return status.what == 'connected';
