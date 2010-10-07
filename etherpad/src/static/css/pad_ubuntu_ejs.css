@@ -134,7 +134,7 @@ a#hidetopmsg { position: absolute; right: 5px; bottom: 5px; }
   width: 150px; display: none;
 }
   
-#padmain {  width:960px; margin:0 auto;  }
+#padmain {  width:960px; margin:0 auto;   }
 
 
 .editbarbutton img
@@ -167,8 +167,8 @@ a#hidetopmsg { position: absolute; right: 5px; bottom: 5px; }
 #editorcontainerbox {
   border-left: 1px solid #c4c4c4; border-right: 1px solid #c4c4c4;
   border-bottom: 1px solid #c4c4c4;
-  background: #fff; overflow: hidden; position: relative;
-  zoom: 1; height: 397px; /*...initially*/ }
+  background: #fff; overflow: hidden; position: relative; bottom:0;
+  zoom: 1; height:700px; /*...initially*/ }
 
 #editorcontainer { height: 100%; }
   
