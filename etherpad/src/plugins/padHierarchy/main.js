@@ -18,11 +18,12 @@ import("plugins.padHierarchy.static.js.main");
 import("plugins.padHierarchy.hooks");
 
 function padHierarchyInit() {
- this.hooks = ['handlePath','aceInitOuterdocbodyHead'];
+ this.hooks = ['handlePath','aceInitInnerdocbodyHead','aceInitOuterdocbodyHead'];
  this.client = new main.padHierarchyInit(); 
  this.description = 'Allows groups of documents to be found and created based on url structure.';
  //this.renderPageBodyPre = main.renderPageBodyPre;
  this.handlePath = hooks.handlePath;
+ this.aceInitInnerdocbodyHead = padHierarchyInit.aceInitInnerdocbodyHead;
  this.aceInitOuterdocbodyHead = padHierarchyInit.aceInitOuterdocbodyHead;
  this.install = install;
  this.uninstall = uninstall;

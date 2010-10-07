@@ -25,6 +25,7 @@ var padeditor = (function(){
         $("#editorloadingbox").hide();
         if (readyFunc) {
           readyFunc();
+          
         }
       }
 

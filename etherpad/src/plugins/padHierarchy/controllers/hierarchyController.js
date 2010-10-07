@@ -59,7 +59,10 @@ function render_main(){
 
 function update_pad_meta(){
     var new_title = sanitizeUnicode(request.params.value);
+    var pad_id = request.params.pad_id;
+    // TODO: make sure that it's not just anyone calling this action!
     
+    // TODO: updated database with new title
     response.write(new_title);
     return true;
 }

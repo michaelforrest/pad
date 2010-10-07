@@ -42,7 +42,7 @@ limitations under the License. */ %>
     pieces.push(' target="_blank"');
     pieces.push(' href="', url, '"');
     if (title) {
-      pieces.push(' title="', title.replace(/\"/g, "&quot;"), '"'); //"
+      pieces.push(' title="', title.replace(/\"/g, "&quot;"), '"'); //
     }
     pieces.push('>', label);
     /*     if (title) {
@@ -400,7 +400,7 @@ limitations under the License. */ %>
 
 
 <% template.define('contentArea', function() { var ejs_data=''; %>
-  <div id="editorloadingbox">Loading...</div>
+	<div id="editorloadingbox">Loading...</div>
   <div id="editorcontainer"><!-- --></div>
 <% return ejs_data; }); %>
 
