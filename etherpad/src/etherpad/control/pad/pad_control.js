@@ -320,7 +320,8 @@ function _checkIfDeleted(pad) {
   }
 }
 
-function render_pad(localPadId) {
+function render_pad(localPadId, options) {
+  if(!options) options = {};
   var proTitle = null, documentBarTitle, initialPassword = null;
   var isPro = isProDomainRequest();
   var userId = padusers.getUserId();
@@ -358,7 +359,7 @@ function render_pad(localPadId) {
         initialPassword = propad.getPassword();
       });
     }
-    documentBarTitle = (proTitle || "Public Pad");
+    documentBarTitle = ( options.title || proTitle || "Public Pad");
 
     var specialKey = request.params.specialKey ||
       (sessions.isAnEtherpadAdmin() ? collab_server.getSpecialKey('invisible') :
