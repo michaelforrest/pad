@@ -52,7 +52,7 @@ helpers.includeCss("plugins/padHierarchy/ubuntu.css");
 	<div id="docbar">
 		<table  id="docbartable">
 		  <tr>
-		  	<td><%: plugins.callHookStr('renderNavigation', {}, '', '', ''); %></td>
+		  	<td><%: plugins.callHookStr('renderNavigation',{request: request}, '', '', ''); %></td>
 	        
 		    <td width="100%">&nbsp;</td>
 	        <%: template.use('docBarItems'); %>

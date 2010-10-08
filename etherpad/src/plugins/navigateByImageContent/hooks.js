@@ -1,5 +1,9 @@
 import("etherpad.log");
 import("sqlbase.sqlbase");
+import("sqlbase.sqlobj");
+import("etherpad.log");
+import("etherpad.utils.*");
+import("plugins.padHierarchy.helpers.hierarchyHelper.*");
 function padModelWriteToDB(args){
 	log.info("************ in navigateByImageContentPlugin doing a save");
 	var text = args.pad.text();
@@ -30,5 +34,5 @@ function renderNavigation(args) {
 	var pad_id = parent_path.join("-");
 	
 	var pads = getPadsBelow(pad_id);
-	return renderTemplateAsString('imageNavigation.ejs',{pads:pads, grouped_pad_list:getGroupChildren(pads,{edit:true})}, 'navigateByImageContent');
+	return renderTemplateAsString('imageNavigation.ejs',{pads:pads, grouped_pad_list:getGroupChildren(pads,{edit:true})},['navigateByImageContent']);
 }
