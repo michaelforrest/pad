@@ -9,6 +9,8 @@ import("etherpad.pad.padutils");
 import("etherpad.sessions.getSession");
 import("plugins.padHierarchy.helpers.hierarchyHelper.*");
 import("etherpad.collab.ace.contentcollector.sanitizeUnicode");
+import("etherpad.pad.model");
+import("etherpad.pro.pro_padmeta");
 
 function onRequest() {
 	var section_path = (request.path.toString() == '/pads') ? 'pads'  :  request.path.toString().split("/pads/")[1].replace(/\/$/ , '');
@@ -38,7 +40,8 @@ function edit_page(){
 	if(!pad) {
 	    getSession().instantCreate = id;
     }
-	return pad_control.render_pad(id);
+    var title = pad && pad.title ? pad.title : permalink;
+	return pad_control.render_pad(id, {title:title});
 }
 
 function redirect_to_pads_path(){
@@ -63,6 +66,15 @@ function update_pad_meta(){
     // TODO: make sure that it's not just anyone calling this action!
     
     // TODO: updated database with new title
+    /*
+    model.accessPadGlobal(pad_id, function(pad) {
+    //pro_padmeta.accessProPad(pad_id,function(pad){
+        pad.setTitle(new_title);
+    });
+    */
+    
+    sqlobj.update("PAD_SQLMETA", {id:pad_id}, {title:new_title})
+    
     response.write(new_title);
     return true;
 }
