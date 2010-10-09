@@ -58,3 +58,77 @@ function makeDraggable(jqueryNodes, eventHandler) {
     node.bind('mousedown', dragStart);
   });
 }
+
+function makeResizableVPane(top, sep, bottom, minTop, minBottom) {
+  if (minTop === undefined) minTop = 0;
+  if (minBottom === undefined) minBottom = 0;
+
+  makeDraggable($(sep), function(eType, evt, state) {
+    if (eType == 'dragstart') {
+      state.startY = evt.pageY;
+      state.topHeight = $(top).height();
+      state.bottomHeight = $(bottom).height();
+      state.minTop = minTop;
+      state.maxTop = (state.topHeight + state.bottomHeight) - minBottom;
+    }
+    else if (eType == 'dragupdate') {
+      var change = evt.pageY - state.startY;
+
+      var topHeight = state.topHeight + change;
+      if (topHeight < state.minTop) { topHeight = state.minTop; }
+      if (topHeight > state.maxTop) { topHeight = state.maxTop; }
+      change = topHeight - state.topHeight;
+
+      var bottomHeight = state.bottomHeight - change;
+      var sepHeight = $(sep).height();
+
+      var totalHeight = topHeight + sepHeight + bottomHeight;
+      topHeight = 100.0 * topHeight / totalHeight;
+      sepHeight = 100.0 * sepHeight / totalHeight;
+      bottomHeight = 100.0 * bottomHeight / totalHeight;
+
+      $(top).css('bottom', 'auto');
+      $(top).css('height', topHeight + "%");
+      $(sep).css('top', topHeight + "%");
+      $(bottom).css('top', (topHeight +  sepHeight) + '%');
+      $(bottom).css('height', 'auto');
+    }
+  });
+}
+
+function makeResizableHPane(left, sep, right, minLeft, minRight) {
+  if (minLeft === undefined) minLeft = 0;
+  if (minRight === undefined) minRight = 0;
+
+  makeDraggable($(sep), function(eType, evt, state) {
+    if (eType == 'dragstart') {
+      state.startX = evt.pageX;
+      state.leftWidth = $(left).width();
+      state.rightWidth = $(right).width();
+      state.minLeft = minLeft;
+      state.maxLeft = (state.leftWidth + state.rightWidth) - minRight;
+    }
+    else if (eType == 'dragupdate') {
+      var change = evt.pageX - state.startX;
+
+      var leftWidth = state.leftWidth + change;
+      if (leftWidth < state.minLeft) { leftWidth = state.minLeft; }
+      if (leftWidth > state.maxLeft) { leftWidth = state.maxLeft; }
+      change = leftWidth - state.leftWidth;
+
+      var rightWidth = state.rightWidth - change;
+      var sepWidth = $(sep).width();
+
+      var totalWidth = leftWidth + sepWidth + rightWidth;
+      leftWidth = 100.0 * leftWidth / totalWidth;
+      sepWidth = 100.0 * sepWidth / totalWidth;
+      rightWidth = 100.0 * rightWidth / totalWidth;
+
+      $(left).css('right', 'auto');
+      $(left).css('width', leftWidth + "%");
+      $(sep).css('left', leftWidth + "%");
+      $(right).css('left', (leftWidth + sepWidth) + '%');
+      $(right).css('width', 'auto');
+    }
+  });
+}

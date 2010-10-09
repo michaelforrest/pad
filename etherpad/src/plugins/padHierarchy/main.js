@@ -18,40 +18,36 @@ import("plugins.padHierarchy.static.js.main");
 import("plugins.padHierarchy.hooks");
 
 function padHierarchyInit() {
- this.hooks = ['handlePath'];
+ this.hooks = ['handlePath','aceInitInnerdocbodyHead','aceInitOuterdocbodyHead'];
  this.client = new main.padHierarchyInit(); 
  this.description = 'Allows groups of documents to be found and created based on url structure.';
  //this.renderPageBodyPre = main.renderPageBodyPre;
  this.handlePath = hooks.handlePath;
+ this.aceInitInnerdocbodyHead = padHierarchyInit.aceInitInnerdocbodyHead;
+ this.aceInitOuterdocbodyHead = padHierarchyInit.aceInitOuterdocbodyHead;
  this.install = install;
  this.uninstall = uninstall;
 }
 
 function install() {
  log.info("Installing padHierarchy");
-// sqlobj.addColumns('billing_purchase', {
-//   title: "TEXT"
-//  });
- sqlobj.createTable('PAD_PATH', {
-   ID: 'int not null '+sqlcommon.autoIncrementClause()+' primary key',
-   PATH: 'varchar(128) character set utf8 collate utf8_bin not null',
-   PAD_ID: 'varchar(128) character set utf8 collate utf8_bin not null',
-   
+ sqlobj.addColumns('PAD_SQLMETA', {
+   permalink: "varchar(128) character set utf8 collate utf8_bin",
+   parent_id: "varchar(128) character set utf8 collate utf8_bin",
+   title: "varchar(128) character set utf8 collate utf8_bin"
   });
+
   /*
-   * CREATE PATH RECORDS FOR EACH EXISTING RECORD IF THESE DON'T ALREADY EXIST
+   * CREATE PATH RECORDS FOR EACH EXISTING PAD IF THESE DON'T ALREADY EXIST
    */
    log.info("Creating path records for existing documents..");
    var allPads = sqlobj.selectMulti("PAD_SQLMETA",{});
    for(var i = 0; i < allPads.length; i++){
    	var pad = allPads[i];
-   	// can't see how to do a join query with sqlobj, so will make lots of db calls instead...
-	var path = sqlobj.selectSingle("PAD_PATH", {PAD_ID:pad.id});
-	if(!path){
+	if(!pad.permalink){
 		log.info("creating path mapping for " + pad.id);
-		sqlobj.insert("PAD_PATH", {PAD_ID:pad.id, PATH:pad.id});
+		sqlobj.update("PAD_SQLMETA",{id:pad.id}, {permalink:pad.id });
 	}
-	
    }
 }
 

@@ -25,6 +25,7 @@ var padeditor = (function(){
         $("#editorloadingbox").hide();
         if (readyFunc) {
           readyFunc();
+          
         }
       }
 
@@ -107,18 +108,6 @@ var padeditor = (function(){
       if (self.ace) {
         self.ace.destroy();
       }
-    },
-    setBottom: function(bottomPx) {
-      var myTop = $("#padeditor").offset().top;
-      var myHeight = $("#padeditor").height();
-      var myBottom = myTop + myHeight;
-      var sizedBoxHeight = $("#editorcontainerbox").height();
-
-      var deltaBottom = bottomPx - myBottom;
-      if (deltaBottom != 0) {
-        $("#editorcontainerbox").height(sizedBoxHeight + deltaBottom);
-      }
-      self.ace.adjustSize();
     },
     disable: function() {
       if (self.ace) {

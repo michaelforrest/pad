@@ -245,11 +245,14 @@ function insert(tableName, obj) {
  *  Currently only supports string equality of constraints.
  */
 function selectSingle(tableName, constraints) {
-  var keyList = keys(constraints);
+  var keyList = keys(constraints || {});
 
-  var stmnt = "SELECT * FROM "+_bq(tableName)+" WHERE (";
-  stmnt += keyList.map(function(k) { return '('+_bq(k)+' = '+'?)'; }).join(' AND ');
-  stmnt += ')';
+  var stmnt = "SELECT * FROM "+_bq(tableName)
+  if(constraints){
+      stmnt +=" WHERE (";
+      stmnt += keyList.map(function(k) { return '('+_bq(k)+' = '+'?)'; }).join(' AND ');
+      stmnt += ')';
+  }
   if (isMysql()) {
     stmnt += ' LIMIT 1';
   }
@@ -482,10 +485,13 @@ function changeColumn(tableName, columnName, newSpec) {
 }
 
 function addColumns(tableName, colspec) {
+  var sample_record = selectSingle(tableName);
   inTransaction(function(conn) {
     eachProperty(colspec, function(name, definition) {
-      var stmnt = "ALTER TABLE "+_bq(tableName)+" ADD COLUMN "+_bq(name)+" "+definition;
-      _executeUpdate(stmnt);
+      if(!sample_record.hasOwnProperty(name)){
+          var stmnt = "ALTER TABLE "+_bq(tableName)+" ADD COLUMN "+_bq(name)+" "+definition;
+          _executeUpdate(stmnt);
+      }
     });
   });
 }

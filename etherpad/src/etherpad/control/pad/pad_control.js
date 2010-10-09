@@ -35,6 +35,7 @@ import("etherpad.log.{logRequest,logException}");
 import("etherpad.sessions");
 import("etherpad.sessions.getSession");
 import("etherpad.utils.*");
+import("etherpad.collab.server_utils");
 import("etherpad.pro.pro_padmeta");
 import("etherpad.pro.pro_pad_db");
 import("etherpad.pro.pro_utils");
@@ -319,7 +320,8 @@ function _checkIfDeleted(pad) {
   }
 }
 
-function render_pad(localPadId) {
+function render_pad(localPadId, options) {
+  if(!options) options = {};
   var proTitle = null, documentBarTitle, initialPassword = null;
   var isPro = isProDomainRequest();
   var userId = padusers.getUserId();
@@ -357,7 +359,7 @@ function render_pad(localPadId) {
         initialPassword = propad.getPassword();
       });
     }
-    documentBarTitle = (proTitle || "Public Pad");
+    documentBarTitle = ( options.title || proTitle || "Public Pad");
 
     var specialKey = request.params.specialKey ||
       (sessions.isAnEtherpadAdmin() ? collab_server.getSpecialKey('invisible') :
@@ -401,6 +403,7 @@ function render_pad(localPadId) {
 
   renderHtml("pad/pad_body2.ejs",
              {localPadId:localPadId,
+	      padIdReadonly: server_utils.padIdToReadonly(localPadId),
               pageTitle:toHTML(proTitle || localPadId),
               initialTitle:toHTML(documentBarTitle),
               bodyClass: bodyClass,
@@ -424,8 +427,11 @@ function render_create_get() {
     "pad/create_body_rafter.ejs" :
     "pad/create_body.ejs";
   // </RAFTER>
-  renderFramed(template, {padId: padId,
-                          fullSuperdomain: pro_utils.getFullSuperdomainHost()});
+  renderHtml(template,
+   {config: appjet.config,
+    bodyClass: 'nonpropad',
+    padId: padId,
+    fullSuperdomain: pro_utils.getFullSuperdomainHost()});
 }
 
 function render_create_post() {

@@ -67,14 +67,6 @@ function Ace2Editor() {
   };
   editor.getFrame = function() { return info.frame || null; };
   editor.focus = pendingInit(function() { info.ace_focus(); });
-  editor.adjustSize = pendingInit(function() {
-    var frameParent = info.frame.parentNode;
-    var parentHeight = frameParent.clientHeight;
-    // deal with case where iframe is hidden, no clientHeight
-    info.frame.style.height = (parentHeight ? parentHeight+"px" :
-			       frameParent.style.height);
-    info.ace_editorChangedSize();
-  });
   editor.setEditable = pendingInit(function(newVal) { info.ace_setEditable(newVal); });
   editor.getFormattedCode = function() { return info.ace_getFormattedCode(); };
   editor.setOnKeyPress = pendingInit(function (handler) { info.ace_setOnKeyPress(handler); });
@@ -204,12 +196,19 @@ function Ace2Editor() {
 	iframeHTML.join('+')+'); doc.close(); '+
 	'}, 0); }';
 
+    var outerHeadContentFromPlugin = [];
+    plugins.callHook(
+        "aceInitOuterdocbodyHead", {outerHeadContentFromPlugin:outerHeadContentFromPlugin});
+
       var outerHTML = [doctype, '<html><head>',
 	$$INCLUDE_CSS("editor.css"),
 	// bizarrely, in FF2, a file with no "external" dependencies won't finish loading properly
 	// (throbs busy while typing)
 	'<link rel="stylesheet" type="text/css" href="data:text/css,"/>',
 	'\x3cscript>', outerScript, '\x3c/script>',
+	
+	outerHeadContentFromPlugin.join(''),
+	
 	'</head><body id="outerdocbody"><div id="sidediv"><!-- --></div><div id="linemetricsdiv">x</div><div id="overlaysdiv"><!-- --></div></body></html>'];
 
 
@@ -234,8 +233,6 @@ function Ace2Editor() {
       editorDocument.open();
       editorDocument.write(outerHTML.join(''));
       editorDocument.close();
-
-      editor.adjustSize();
     })();
   };
 
