@@ -2,6 +2,21 @@ ConsumerTest = TestCase("ConsumerTest");
 
 ConsumerTest.prototype.setUp = function(){
 	this.consumer = new OpenidConsumer( {openid_url: "https://login.launchpad.net/+openid"} );
+	this.params = {
+		'openid.op_endpoint':'https://login.launchpad.net/+openid',
+		'openid.signed':'assoc_handle,claimed_id,identity,invalidate_handle,mode,ns,ns.sreg,op_endpoint,response_nonce,return_to,signed,sreg.nickname',
+		'openid.sig':'TYRoYZcYNm9Uh3bA8N3Im5cC2ps=',
+		'openid.response_nonce':'2010-09-03T11:25:39ZDf9KwX',
+		'openid.claimed_id':'https://login.launchpad.net/+id/ref466F',
+		'openid.assoc_handle':'{HMAC-SHA1}{4c80db33}{muvwTA==}',
+		'openid.sreg.nickname':'michaelforrest',
+		'openid.ns':'http://specs.openid.net/auth/2.0',
+		'openid.identity':'https://login.launchpad.net/+id/ref466F',
+		'openid.ns.sreg':'http://openid.net/extensions/sreg/1.1',
+		'openid.mode':'id_res',
+		'openid.invalidate_handle':'lalalalalalaaaaaa',
+		'openid.return_to':'http://localhost:9000/ep/openid/?foo=bar&open_id_complete=1'
+	};
 }
 
 ConsumerTest.prototype.testBegin = function(){
@@ -14,24 +29,14 @@ ConsumerTest.prototype.testBegin = function(){
 	
 }
 ConsumerTest.prototype.testCompleteLogin = function(){
-	var params = {
-		'openid.op_endpoint':'https://login.launchpad.net/+openid',
-		'openid.signed':'assoc_handle,claimed_id,identity,invalidate_handle,mode,ns,ns.sreg,op_endpoint,response_nonce,return_to,signed,sreg.nickname',
-		'openid.sig':'TYRoYZcYNm9Uh3bA8N3Im5cC2ps=',
-		'openid.response_nonce':'2010-09-03T11:25:39ZDf9KwX',
-		'open_id_complete':'1',
-		'foo':'bar',
-		'openid.claimed_id':'https://login.launchpad.net/+id/ref466F',
-		'openid.assoc_handle':'{HMAC-SHA1}{4c80db33}{muvwTA==}',
-		'openid.sreg.nickname':'michaelforrest',
-		'openid.ns':'http://specs.openid.net/auth/2.0',
-		'openid.identity':'https://login.launchpad.net/+id/ref466F',
-		'openid.ns.sreg':'http://openid.net/extensions/sreg/1.1',
-		'openid.mode':'id_res',
-		'openid.invalidate_handle':'lalalalalalaaaaaa',
-		'openid.return_to':'http://localhost:9000/ep/openid/?foo=bar&open_id_complete=1'
-	};
-	assert('should validate response correctly',this.consumer.completeLogin(params));
+	assert('should validate response correctly',this.consumer.completeLogin(this.params));
 	assertEquals("michaelforrest",this.consumer.nickname); 
 	
+}
+ConsumerTest.prototype.testInjective = function(){
+	var keyValueForm1 = this.consumer.keyValueFormEncode(this.params);
+	this.params['openid.response_nonce'] = 'hello';
+	var keyValueForm2 = this.consumer.keyValueFormEncode(this.params);
+	
+	assertNotEquals(keyValueForm1, keyValueForm2);
 }
