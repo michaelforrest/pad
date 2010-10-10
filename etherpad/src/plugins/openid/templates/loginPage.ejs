@@ -1,8 +1,0 @@
-<%
-	helpers.includeJQuery();
-  helpers.setHtmlTitle("Login with OpenID");
-
-%>
-<% template.define('contentArea', function() { var ejs_data=''; %>
-	<%: renderTemplateAsString('loginForm.ejs', {}, ['openid']); %>
-<% return ejs_data; }); %>

@@ -16,14 +16,8 @@ function renderAuthentication(){
 function onRequest(){
     if(request.params['logout']) return logout();
 	if(request.params['open_id_complete']) return completeLogin();
-	if(request.method == "GET") return loginForm();
 	if(request.method == "POST") return create();
 	return false;
-}
-function loginForm(){
-    log.info("showing login pace")
-    response.write(renderTemplateAsString('loginForm.ejs', {}, ['openid']));
-    return true;
 }
 function create(){
     var session = getSession();
