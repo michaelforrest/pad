@@ -1,6 +1,22 @@
-<form action="/ep/openid/" method="post">
-	<label for="openid_url">OpenID:</label>
-	<!-- input value="https://www.google.com/accounts/o8/id" name="openid_url"/-->
-	<input value="https://login.launchpad.net/+openid" name="openid_url"/>
-	<input id="openid_submit" type="submit" value="Sign-In"/>
+<% 
+ 	helpers.includeJs("plugins/openid/openid-jquery.js"); 
+	helpers.includeCss("plugins/openid/openid.css");
+%>
+
+<script type="text/javascript" charset="utf-8">
+	$(function(){
+		openid.img_path = "/static/img/plugins/openid/";
+		openid.init('openid_url');	
+	});
+</script>
+<form action="/ep/openid/" method="post" id="openid_form">
+	<div id="openid_choice">
+		<p>Please click your account provider:</p>
+		<div id="openid_btns"></div>
+	</div>
+	<div id="openid_input_area">
+		<label for="openid_url">OpenID:</label>
+		<input value="http://" name="openid_url" id="openid_url"/>
+		<input id="openid_submit" type="submit" value="Sign-In"/>
+	</div>
 </form>

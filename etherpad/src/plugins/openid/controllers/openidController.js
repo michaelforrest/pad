@@ -1,29 +1,76 @@
 import("etherpad.log");
 import("etherpad.utils.*");
-import("plugins.openid.models.openidSession");
-import("plugins.openid.models.openidConsumer");
+import("etherpad.sessions.getSession");
+jimport("org.openid4java.consumer.ConsumerManager");
+jimport("org.openid4java.message.ParameterList");
+jimport("org.openid4java.message.Parameter");
+jimport("org.openid4java.discovery.DiscoveryInformation");
+jimport("org.openid4java.message.sreg.SRegRequest");
+
+
 
 function renderAuthentication(){
-	return openidSession.isLoggedIn() ? openidSession.getUserName() : renderTemplateAsString('loginForm.ejs', {}, ['openid']);
-
+    return renderTemplateAsString('loginForm.ejs', {}, ['openid']);
+	//return openidSession.isLoggedIn() ? openidSession.getUserName() : 
 }
 function onRequest(){
-	if(request.method == "POST") return create();
+    if(request.params['logout']) return logout();
 	if(request.params['open_id_complete']) return completeLogin();
+	if(request.method == "GET") return loginForm();
+	if(request.method == "POST") return create();
 	return false;
 }
-
+function loginForm(){
+    log.info("showing login pace")
+    response.write(renderTemplateAsString('loginForm.ejs', {}, ['openid']));
+    return true;
+}
 function create(){
-	response.write("POSTED TO OPENID with " + request.params.openid_url);
-	response.write("   " + openidConsumer.OpenidConsumer );
-	var consumer = new openidConsumer.OpenidConsumer( {openid_url: request.params.openid_url} );
-	response.redirect(	consumer.getBeginUrl({base: 'http://localhost:9000', 
-						  		return_to_path:'/ep/openid/?foo=bar',
-						  		required:'email,nickname,fullname'  }));
+    var session = getSession();
+    var manager = new ConsumerManager();
+    var discoveries = manager.discover(request.params.openid_url);
+    var discovered = manager.associate(discoveries);
+    
+    // store the discovery information in the user's session for later use
+    // leave out for stateless operation / if there is no session
+    session.discovered= discovered;
+    var returnUrl = "http://localhost:9000/ep/openid/?open_id_complete=true";
+    var authReq = manager.authenticate(discovered, returnUrl);
+    
+    var sregReq = SRegRequest.createFetchRequest();
+    sregReq.addAttribute("fullname", true);
+    sregReq.addAttribute("nickname", true);
+    sregReq.addAttribute("email", true);
+    authReq.addExtension(sregReq);
+    
+    response.redirect( authReq.getDestinationUrl(true) );
 	return true;
 }
 function completeLogin(){
-	response.write(request.params);
-	for(var e in request.params) response.write("<br>'" + e + "':'" + request.params[e] + "',"); 
+    var openidResp = new ParameterList();
+    for(var e in request.params){
+        openidResp.set(new Parameter(e, unescape(request.params[e])));
+    }
+    log.info("REPONSE ParameterList: " + openidResp);
+    var session = getSession();
+    discovered = session.discovered;
+    var manager = new ConsumerManager();
+    var verification = manager.verify("http://localhost:9000" + request.path + "?" + request.query, openidResp, discovered);
+    var verified = verification.getVerifiedId();
+    if (verified != null){
+        response.write("logged in successfully");
+        for(var e in request.params ) response.write("<p>" + e + "=" + request.params[e] + "</p>")
+        response.write("<a href='?logout=true'>log out</a>");
+    }else{
+        response.write("Failed to log in: " + verification.getStatusMsg() );
+    }
 	return true;
+}
+
+function logout(){
+    response.write("logging out");
+    var session = getSession();
+    session.discovered = null;
+    session["openid-claimed"] = null;
+    return true;
 }

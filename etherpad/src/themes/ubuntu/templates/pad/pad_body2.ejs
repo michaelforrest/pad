@@ -248,6 +248,9 @@ limitations under the License. */ %>
       makeResizableVPane("#padusers", "#hdraggie", "#padchat", 75, 75);
     });
   </script>
+ <div class="aux" style="margin-bottom:5px">
+	   <%: plugins.callHookStr('renderAuthentication', {}, '', '', ''); %>
+   </div>
   <div id="padusers">
     <div id="connectionstatus">
       <!-- -->
