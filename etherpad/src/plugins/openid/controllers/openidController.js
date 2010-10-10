@@ -34,7 +34,8 @@ function create(){
     // store the discovery information in the user's session for later use
     // leave out for stateless operation / if there is no session
     session.discovered= discovered;
-    var returnUrl = "http://localhost:9000/ep/openid/?open_id_complete=true";
+    log.info("HOST:" + request.host);
+    var returnUrl = request.scheme + "://" + request.host + "/ep/openid/?open_id_complete=true";
     var authReq = manager.authenticate(discovered, returnUrl);
     
     var sregReq = SRegRequest.createFetchRequest();
@@ -51,19 +52,19 @@ function completeLogin(){
     for(var e in request.params){
         openidResp.set(new Parameter(e, unescape(request.params[e])));
     }
-    log.info("REPONSE ParameterList: " + openidResp);
+    log.info("OpenID response ParameterList: " + openidResp);
     var session = getSession();
     discovered = session.discovered;
     var manager = new ConsumerManager();
-    var verification = manager.verify("http://localhost:9000" + request.path + "?" + request.query, openidResp, discovered);
+    var verification = manager.verify(request.scheme + "://" + request.host + request.path + "?" + request.query, openidResp, discovered);
     var verified = verification.getVerifiedId();
     if (verified != null){
-        response.write("logged in successfully");
-        for(var e in request.params ) response.write("<p>" + e + "=" + request.params[e] + "</p>")
+        response.write("Logged in successfully");
         response.write("<a href='?logout=true'>log out</a>");
     }else{
-        response.write("Failed to log in: " + verification.getStatusMsg() );
+        response.write("Failed to log in: " + verification.getStatusMsg());
     }
+    for(var e in request.params ) response.write("<p>" + e + "=" + request.params[e] + "</p>")    
 	return true;
 }
 
